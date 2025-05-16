@@ -3,6 +3,7 @@ import path from 'path';
 import { logger } from '../utils/logger';
 import { ShapeFactory } from '../factories/ShapeFactory';
 import { Shape } from '../factories/Shape';
+import { ShapeService } from './ShapeService';
 
 export class FileReader {
   static readFigureData(filePath: string, factory: ShapeFactory): Shape[] {
@@ -21,21 +22,6 @@ export class FileReader {
 
     logger.info(`Read ${lines.length} lines from file: ${filePath}`);
 
-    return this.#parse(lines, factory);
-  }
-
-  static #parse(lines: string[], factory: ShapeFactory): Shape[] {
-    const shapes: Shape[] = [];
-
-    for (const line of lines) {
-      try {
-        const shape = factory.createFromString(line);
-        shapes.push(shape);
-      } catch (err) {
-        logger.warn(`Error in line "${line}": ${(err as Error).message}`);
-      }
-    }
-
-    return shapes;
+    return ShapeService.generateShapesFromInput(lines, factory);
   }
 }

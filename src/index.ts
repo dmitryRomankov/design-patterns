@@ -25,7 +25,7 @@ export function main(): void {
       const isRhombus = RectangleService.isRhombus(rect);
       const isTrapezoid = RectangleService.isTrapezoid(rect);
       logger.info(
-        `[Rectangle ${rect.id}] Area: ${area}, Perimeter: ${perimeter}, IsSquare: ${isSquare}, IsConvex: ${isConvex}, IsRhombus:${isRhombus}, isTrapezoid: ${isTrapezoid}`
+        `[Rectangle ${rect.id}] Area: ${area}, Perimeter: ${perimeter}, IsSquare: ${isSquare}, IsConvex: ${isConvex}, IsRhombus: ${isRhombus}, isTrapezoid: ${isTrapezoid}`
       );
     }
   });
