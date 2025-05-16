@@ -21,8 +21,11 @@ export function main(): void {
       const area = RectangleService.getArea(rect);
       const perimeter = RectangleService.getPerimeter(rect);
       const isSquare = RectangleService.isSquare(rect);
+      const isConvex = RectangleService.isConvex(rect);
+      const isRhombus = RectangleService.isRhombus(rect);
+      const isTrapezoid = RectangleService.isTrapezoid(rect);
       logger.info(
-        `[Rectangle ${rect.id}] Area: ${area}, Perimeter: ${perimeter}, IsSquare: ${isSquare}`
+        `[Rectangle ${rect.id}] Area: ${area}, Perimeter: ${perimeter}, IsSquare: ${isSquare}, IsConvex: ${isConvex}, IsRhombus:${isRhombus}, isTrapezoid: ${isTrapezoid}`
       );
     }
   });

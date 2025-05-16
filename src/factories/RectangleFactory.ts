@@ -11,11 +11,13 @@ export class RectangleFactory extends ShapeFactory {
       throw new InvalidShapeDataError('Incorrect data for the rectangle');
     }
 
-    const xValues = [coords[0], coords[2], coords[4], coords[6]];
-    const yValues = [coords[1], coords[3], coords[5], coords[7]];
-    const topLeft = new Point(Math.min(...xValues), Math.max(...yValues));
-    const bottomRight = new Point(Math.max(...xValues), Math.min(...yValues));
+    const points: [Point, Point, Point, Point] = [
+      new Point(coords[0], coords[1]),
+      new Point(coords[2], coords[3]),
+      new Point(coords[4], coords[5]),
+      new Point(coords[6], coords[7]),
+    ];
 
-    return new Rectangle(crypto.randomUUID(), topLeft, bottomRight);
+    return new Rectangle(crypto.randomUUID(), points);
   }
 }
