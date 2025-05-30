@@ -4,7 +4,7 @@ import { SphereFactory } from './factories/SphereFactory';
 import { FileReader } from './services/FileReader';
 import { ShapeRepository } from './repository/ShapeRepository';
 import { ShapeSpecifications } from './specifications/ShapeSpecifications';
-import { ShapeComparators } from './comparators/ShapeComparators';
+import { ShapeComparator } from './comparators/ShapeComparators';
 import { Warehouse } from './warehouse/Warehouse';
 import { Rectangle } from './entities/Rectangle';
 import { Sphere } from './entities/Sphere';
@@ -56,7 +56,7 @@ export function main(): void {
   logger.info('Figures sort by X of the first point');
   const sorted = repository
     .getAll()
-    .sort((a, b) => ShapeComparators.firstPointByAxisAsc(a, b, 'x'));
+    .sort((a, b) => ShapeComparator.firstPointByAxisAsc(a, b, 'x'));
   sorted.forEach((s, i) => logger.info(`Figure ${i + 1}: ${s.id}`));
 
   logger.info('Loading ended');

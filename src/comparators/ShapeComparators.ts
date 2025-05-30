@@ -11,7 +11,7 @@ const geSpecificPoint = (p: Shape) =>
     ? p.center
     : null;
 
-export class ShapeComparators {
+export class ShapeComparator {
   static byIdAsc = (a: Shape, b: Shape) => a.id.localeCompare(b.id);
 
   static firstPointByAxisAsc = (a: Shape, b: Shape, axis: Axis) => {
