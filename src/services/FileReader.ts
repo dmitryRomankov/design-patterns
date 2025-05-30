@@ -1,16 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { ShapeFactory } from '../factories/ShapeFactory';
-import { InMemoryShapeRepository } from '../repository/InMemoryShapeRepository';
+import { ShapeRepository } from '../repository/ShapeRepository';
 import { ShapeObserver } from '../observers/ShapeObserver';
 import { Shape } from '../factories/Shape';
 import { logger } from '../utils/logger';
 
 export class FileReader {
-  constructor(
-    private filePath: string,
-    private repository: InMemoryShapeRepository
-  ) {}
+  constructor(private filePath: string, private repository: ShapeRepository) {}
 
   readFigureData(factory: ShapeFactory): Shape[] {
     const fullPath = path.resolve(this.filePath);

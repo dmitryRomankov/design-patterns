@@ -1,8 +1,8 @@
-import { InMemoryShapeRepository } from '../../src/repository/InMemoryShapeRepository';
+import { ShapeRepository } from '../repository/ShapeRepository';
 import { Rectangle } from '../../src/entities/Rectangle';
 import { Point } from '../../src/entities/Point';
 
-const repo = new InMemoryShapeRepository();
+const repo = new ShapeRepository();
 
 const rect1 = new Rectangle('r1', [
   new Point(0, 0),

@@ -2,7 +2,7 @@ import { logger } from './utils/logger';
 import { RectangleFactory } from './factories/RectangleFactory';
 import { SphereFactory } from './factories/SphereFactory';
 import { FileReader } from './services/FileReader';
-import { InMemoryShapeRepository } from './repository/InMemoryShapeRepository';
+import { ShapeRepository } from './repository/ShapeRepository';
 import { ShapeSpecifications } from './specifications/ShapeSpecifications';
 import { ShapeComparators } from './comparators/ShapeComparators';
 import { Warehouse } from './warehouse/Warehouse';
@@ -15,7 +15,7 @@ const SPHERES_PATH = './data/spheres.txt';
 export function main(): void {
   logger.info('Start loading figures');
 
-  const repository = new InMemoryShapeRepository();
+  const repository = new ShapeRepository();
 
   const rectReader = new FileReader(RECTANGLES_PATH, repository);
   const sphereReader = new FileReader(SPHERES_PATH, repository);
