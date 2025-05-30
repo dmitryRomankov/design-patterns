@@ -1,6 +1,6 @@
 import express from 'express';
-import { main } from './index.js'; // обязательно .js, если ты используешь ESM
-import { logger } from './utils/logger.js';
+import { main } from './index';
+import { logger } from './utils/logger';
 
 const app = express();
 const PORT = 3000;

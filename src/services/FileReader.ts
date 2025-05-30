@@ -1,27 +1,49 @@
 import fs from 'fs';
 import path from 'path';
-import { logger } from '../utils/logger';
 import { ShapeFactory } from '../factories/ShapeFactory';
+import { InMemoryShapeRepository } from '../repository/InMemoryShapeRepository';
+import { ShapeObserver } from '../observers/ShapeObserver';
 import { Shape } from '../factories/Shape';
-import { ShapeService } from './ShapeService';
+import { logger } from '../utils/logger';
 
 export class FileReader {
-  static readFigureData(filePath: string, factory: ShapeFactory): Shape[] {
-    const absPath = path.resolve(filePath);
+  constructor(
+    private filePath: string,
+    private repository: InMemoryShapeRepository
+  ) {}
 
-    if (!fs.existsSync(absPath)) {
-      logger.error(`File not found: ${absPath}`);
-      return [];
-    }
+  readFigureData(factory: ShapeFactory): Shape[] {
+    const fullPath = path.resolve(this.filePath);
 
     const lines = fs
-      .readFileSync(absPath, 'utf-8')
+      .readFileSync(fullPath, 'utf-8')
       .split('\n')
       .map((line) => line.trim())
       .filter((line) => line.length > 0 && !line.startsWith('#'));
 
-    logger.info(`Read ${lines.length} lines from file: ${filePath}`);
+    const loadedShapes: Shape[] = [];
 
-    return ShapeService.generateShapesFromInput(lines, factory);
+    lines.forEach((line, index) => {
+      try {
+        const shape = factory.createFromString(line);
+        if (shape) {
+          this.repository.add(shape);
+
+          const observer = new ShapeObserver(shape);
+          shape.subscribe(observer);
+          shape.notify();
+
+          loadedShapes.push(shape);
+        }
+      } catch (err) {
+        logger.error(
+          `Line ${index + 1} is missed: "${line}". Reason: ${
+            (err as Error).message
+          }`
+        );
+      }
+    });
+
+    return loadedShapes;
   }
 }
