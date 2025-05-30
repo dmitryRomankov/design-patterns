@@ -4,7 +4,7 @@ import { Sphere } from '../entities/Sphere';
 
 type Axis = 'x' | 'y';
 
-const geSpecificPoint = (p: Shape) =>
+const getFirstPoint = (p: Shape) =>
   p instanceof Rectangle
     ? p.vertices[0]
     : p instanceof Sphere
@@ -15,8 +15,8 @@ export class ShapeComparator {
   static byIdAsc = (a: Shape, b: Shape) => a.id.localeCompare(b.id);
 
   static firstPointByAxisAsc = (a: Shape, b: Shape, axis: Axis) => {
-    const aPoint = geSpecificPoint(a);
-    const bPoint = geSpecificPoint(b);
+    const aPoint = getFirstPoint(a);
+    const bPoint = getFirstPoint(b);
     if (!aPoint || !bPoint) return 0;
     return aPoint[axis] - bPoint[axis];
   };
