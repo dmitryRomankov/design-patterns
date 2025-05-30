@@ -54,7 +54,9 @@ export function main(): void {
   inQuadrant.forEach((shape, i) => logger.info(`ShapeId ${i + 1} ${shape.id}`));
 
   logger.info('Figures sort by X of the first point');
-  const sorted = repository.getAll().sort(ShapeComparators.byXFirstPointAsc);
+  const sorted = repository
+    .getAll()
+    .sort((a, b) => ShapeComparators.firstPointByAxisAsc(a, b, 'x'));
   sorted.forEach((s, i) => logger.info(`Figure ${i + 1}: ${s.id}`));
 
   logger.info('Loading ended');

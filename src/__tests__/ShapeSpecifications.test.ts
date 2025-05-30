@@ -15,16 +15,16 @@ describe('ShapeSpecifications', () => {
     Warehouse.getInstance().update('r1', { area: 1 });
   });
 
-  it('identifies shape in first quadrant', () => {
+  it('should identify shape in first quadrant', () => {
     expect(ShapeSpecifications.isInFirstQuadrant(rect)).toBe(true);
   });
 
-  it('matches area within range', () => {
+  it('should match area within range', () => {
     const spec = ShapeSpecifications.areaInRange(0.5, 1.5);
     expect(spec(rect)).toBe(true);
   });
 
-  it('matches distance from origin', () => {
+  it('should match distance from origin', () => {
     const spec = ShapeSpecifications.distanceFromOriginInRange(0, 10);
     expect(spec(rect)).toBe(true);
   });

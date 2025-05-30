@@ -2,40 +2,22 @@ import { Shape } from '../factories/Shape';
 import { Rectangle } from '../entities/Rectangle';
 import { Sphere } from '../entities/Sphere';
 
+type Axis = 'x' | 'y';
+
+const geSpecificPoint = (p: Shape) =>
+  p instanceof Rectangle
+    ? p.vertices[0]
+    : p instanceof Sphere
+    ? p.center
+    : null;
+
 export class ShapeComparators {
   static byIdAsc = (a: Shape, b: Shape) => a.id.localeCompare(b.id);
 
-  static byXFirstPointAsc = (a: Shape, b: Shape) => {
-    const aPoint =
-      a instanceof Rectangle
-        ? a.vertices[0]
-        : a instanceof Sphere
-        ? a.center
-        : null;
-    const bPoint =
-      b instanceof Rectangle
-        ? b.vertices[0]
-        : b instanceof Sphere
-        ? b.center
-        : null;
+  static firstPointByAxisAsc = (a: Shape, b: Shape, axis: Axis) => {
+    const aPoint = geSpecificPoint(a);
+    const bPoint = geSpecificPoint(b);
     if (!aPoint || !bPoint) return 0;
-    return aPoint.x - bPoint.x;
-  };
-
-  static byYFirstPointAsc = (a: Shape, b: Shape) => {
-    const aPoint =
-      a instanceof Rectangle
-        ? a.vertices[0]
-        : a instanceof Sphere
-        ? a.center
-        : null;
-    const bPoint =
-      b instanceof Rectangle
-        ? b.vertices[0]
-        : b instanceof Sphere
-        ? b.center
-        : null;
-    if (!aPoint || !bPoint) return 0;
-    return aPoint.y - bPoint.y;
+    return aPoint[axis] - bPoint[axis];
   };
 }
