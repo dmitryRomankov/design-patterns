@@ -24,7 +24,7 @@ export class SphereService {
     const R = sphere.radius;
 
     if (Math.abs(d) >= R) {
-      return 0; // no intersect
+      return 0;
     }
 
     const h1 = R - Math.abs(d);

@@ -1,6 +1,8 @@
 import { Rectangle } from '../entities/Rectangle';
 import { Point } from '../entities/Point';
 
+const dist = (p1: Point, p2: Point) => Math.hypot(p1.x - p2.x, p1.y - p2.y);
+
 export class RectangleService {
   static getArea(rect: Rectangle): number {
     const [a, , c] = rect.vertices;
@@ -11,13 +13,11 @@ export class RectangleService {
 
   static getPerimeter(rect: Rectangle): number {
     const [a, b, c, d] = rect.vertices;
-    const dist = (p1: Point, p2: Point) => Math.hypot(p1.x - p2.x, p1.y - p2.y);
     return dist(a, b) + dist(b, c) + dist(c, d) + dist(d, a);
   }
 
   static isSquare(rect: Rectangle): boolean {
     const [a, b, c, d] = rect.vertices;
-    const dist = (p1: Point, p2: Point) => Math.hypot(p1.x - p2.x, p1.y - p2.y);
     const side1 = dist(a, b);
     const side2 = dist(b, c);
     const diag1 = dist(a, c);
@@ -64,7 +64,6 @@ export class RectangleService {
   }
 
   private static _isRhombus(points: Point[]): boolean {
-    const dist = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
     const d1 = dist(points[0], points[1]);
     return points.every((_, i) => dist(points[i], points[(i + 1) % 4]) === d1);
   }
