@@ -1,6 +1,6 @@
 import { IVisitor } from './IVisitor';
 
 export interface IDataSource {
-  getData(): any;
+  getData(): void;
   accept(visitor: IVisitor): void;
 }
